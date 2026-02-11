@@ -1,0 +1,23 @@
+﻿@model IEnumerable<User>
+
+<h2>Все события</h2>
+
+<table class="table">
+	<thead>
+		<tr>
+			<th>Name</th>
+			<th>Age</th>
+			<th>Email</th>
+		</tr>
+	</thead>
+	<tbody>
+		@foreach (var user in Model)
+		{
+			<tr>
+				<td>@user.Username</td>
+				<td>@user.Age</td>
+				<td>@user.Email</td>
+			</tr>
+		}
+	</tbody>
+</table>
