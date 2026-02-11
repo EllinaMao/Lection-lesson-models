@@ -4,6 +4,7 @@ using Lection.ViewModels;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System.Reflection;
+using System.Text;
 
 namespace Lection.Controllers
 {/*
@@ -54,12 +55,22 @@ namespace Lection.Controllers
                     Username = model.Username,
                     Email = model.Email,
                     Age = model.Age,
-                    Password = model.Password 
+                    Password = model.Password
                 };
 
                 _userService.Register(newUser);
                 return RedirectToAction("Index");
             }
+            var st = new StringBuilder();
+            foreach (var value in ModelState.Values)
+            {
+                foreach (var error in value.Errors)
+                {
+                    st.AppendLine(error.ErrorMessage + "<br />") ;
+                }
+            }
+            model.Errors = st.ToString();
+
             return View(model);
         }
 
